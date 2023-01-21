@@ -4,7 +4,6 @@ import { EngineContext, Spell } from '../types'
 import SpellRunner from './SpellRunner'
 
 type SpellManagerArgs = {
-  magickInterface: EngineContext
   socket?: io.Socket
   cache?: boolean
 }
@@ -13,15 +12,12 @@ export default class SpellManager {
   spellRunnerMap: Map<string, SpellRunner> = new Map()
   socket?: io.Socket
   cache: boolean
-  magickInterface: EngineContext
 
   constructor({
-    magickInterface,
     socket = undefined,
     cache = false,
   }: SpellManagerArgs) {
     this.socket = socket
-    this.magickInterface = magickInterface
     this.cache = cache
   }
 
@@ -73,7 +69,6 @@ export default class SpellManager {
       return this.getSpellRunner(spell.name)
 
     const spellRunner = new SpellRunner({
-      magickInterface: this.magickInterface,
       socket: this.socket,
     })
 

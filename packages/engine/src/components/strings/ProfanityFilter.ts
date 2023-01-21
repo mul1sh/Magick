@@ -5,7 +5,6 @@ import { hasBadWords } from 'expletives'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,

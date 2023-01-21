@@ -1,7 +1,6 @@
 import io from 'socket.io'
 
 import {
-  EngineContext,
   GraphData,
   ModuleComponent,
   Spell as SpellType,
@@ -12,7 +11,6 @@ import { Module } from '../plugins/modulePlugin/module'
 import { extractModuleInputKeys } from './graphHelpers'
 
 type RunSpellConstructor = {
-  magickInterface: EngineContext
   socket?: io.Socket
 }
 
@@ -20,11 +18,10 @@ class SpellRunner {
   engine: MagickEngine
   currentSpell!: SpellType
   module: Module
-  magickInterface: EngineContext
   ranSpells: string[] = []
   socket?: io.Socket | null = null
 
-  constructor({ magickInterface, socket }: RunSpellConstructor) {
+  constructor({ socket }: RunSpellConstructor) {
     // Initialize the engine
     this.engine = initSharedEngine({
       name: 'demo@0.1.0',
@@ -38,9 +35,6 @@ class SpellRunner {
     this.module = new Module()
 
     if (socket) this.socket = socket
-
-    // Set the interface that this runner will use when running workers
-    this.magickInterface = magickInterface
 
     // We should probably load up here all the "modules" the spell needds to run
     // This would basicallyt be an array of spells pulled from the DB
@@ -59,7 +53,6 @@ class SpellRunner {
   get context() {
     return {
       module: this.module,
-      magick: this.magickInterface,
       silent: true,
     }
   }

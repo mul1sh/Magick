@@ -10,7 +10,6 @@ const provider = new ethers.providers.JsonRpcProvider(
 )
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,

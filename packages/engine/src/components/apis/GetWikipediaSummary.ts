@@ -1,7 +1,6 @@
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -55,7 +54,6 @@ export class GetWikipediaSummary extends MagickComponent<void> {
     _node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
     this._task.closed = ['success', 'error']
 

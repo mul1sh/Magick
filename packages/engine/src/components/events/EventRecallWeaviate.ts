@@ -2,7 +2,6 @@ import Rete from 'rete'
 
 import {
   Event,
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,

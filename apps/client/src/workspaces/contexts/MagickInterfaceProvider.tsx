@@ -193,6 +193,48 @@ const MagickInterfaceProvider = ({ children, tab }) => {
     publish($TEXT_EDITOR_CLEAR(tab.id))
   }
 
+  const getEventWeaviate = async ({
+    type = 'default',
+    sender = 'system',
+    observer = 'system',
+    entities = [],
+    client = 'system',
+    channel = 'system',
+    maxCount = 10,
+    target_count = 'single',
+    max_time_diff = -1,
+  }) => {
+    const urlString = `${
+      import.meta.env.VITE_APP_API_URL ??
+      import.meta.env.API_ROOT_URL
+    }/eventWeaviate`
+
+    const params = {
+      type,
+      observer,
+      sender,
+      entities,
+      client,
+      channel,
+      maxCount,
+      target_count,
+      max_time_diff,
+    } as Record<string, any>
+
+    const url = new URL(urlString)
+    for (let p in params) {
+      url.searchParams.append(p, params[p])
+    }
+
+    const response = await fetch(url.toString())
+    console.log(response)
+    if (response.status !== 200) return null
+    const json = await response.json()
+    return json.event
+  }
+
+
+
   const queryGoogle = async (query: string) => {
     const url = `${magickApiRootUrl}/query_google`
     const response = await axios.post(url, {
@@ -249,6 +291,7 @@ const MagickInterfaceProvider = ({ children, tab }) => {
     clearTextEditor,
     runSpell,
     refreshEventTable,
+    getEventWeaviate,
     queryGoogle,
     sendToAvatar,
     getSpell,

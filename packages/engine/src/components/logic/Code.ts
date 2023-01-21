@@ -1,7 +1,6 @@
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
