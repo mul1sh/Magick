@@ -2,7 +2,6 @@ import Rete from 'rete'
 
 import {
   Event,
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -79,7 +78,6 @@ export class EventRecall extends MagickComponent<Promise<InputReturn>> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { silent, magick }: { silent: boolean; magick: EngineContext }
   ) {
     
     const getEvents = async (params: GetEventArgs) => {
@@ -121,7 +119,7 @@ export class EventRecall extends MagickComponent<Promise<InputReturn>> {
       maxCount,
       max_time_diff,
     })
-    if (!silent) node.display(`Event ${type} found` || 'Not found')
+    // if (!silent) node.display(`Event ${type} found` || 'Not found')
     
     let conversation = '';
 

@@ -1,7 +1,6 @@
 import isEqual from 'lodash/isEqual'
 
 import {
-  EngineContext,
   ModuleWorkerOutput,
   NodeData,
   Spell,
@@ -10,6 +9,7 @@ import {
 } from '../../types'
 import { SpellControl } from '../../dataControls/SpellControl'
 import { MagickComponent } from '../../magick-component'
+
 const info = `The Module component allows you to add modules into your graph.  A module is a bundled self contained graph that defines inputs, outputs, and triggers using components.`
 
 type Socket = {
@@ -160,28 +160,17 @@ export class SpellComponent extends MagickComponent<
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: { [key: string]: string },
-    {
-      magick,
-      silent,
-    }: {
-      module: { outputs: ModuleWorkerOutput[] }
-      magick: EngineContext
-      silent: Boolean
-    }
   ) {
     // We format the inputs since these inputs rely on the use of the socket keys.
     const flattenedInputs = this.formatInputs(node, inputs)
 
-    if (!magick.runSpell) return {}
-    const outputs = await magick.runSpell(
-      flattenedInputs,
-      node.data.spellId as string
-      )
-
-    if (!silent) node.display(`${JSON.stringify(outputs)}`)
-    else {
-      console.log('outputs in spell!', outputs)
-    }
+    // TODO:
+    const outputs = ["No output, please fix interface"]
+    
+    // const outputs = await runSpell({
+    //   spellName: node.data.spellId as string,
+    //   inputs: flattenedInputs,
+    // })
 
     return this.formatOutputs(node, outputs)
   }

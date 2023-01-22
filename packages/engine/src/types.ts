@@ -110,25 +110,9 @@ export type Env = {
   APP_SEARCH_SERVER_URL: string
 }
 
-export type EngineContext = {
-  env: Env
-  runSpell: (
-    flattenedInputs: Record<string, any>,
-    spellId: string,
-  ) => Record<string, any>
-  completion: (body: CompletionBody) => Promise<CompletionResponse>
-  getSpell: (spellId: string) => Promise<any | Spell>
-  processCode: (
-    code: unknown,
-    inputs: MagickWorkerInputs,
-    data: Record<string, any>,
-    language?: string | null
-  ) => any | void
-}
-
 export type EventPayload = Record<string, any>
 
-export interface EditorContext extends EngineContext {
+export interface EditorContext {
   sendToAvatar: (data: any) => void
   onTrigger: (node: MagickNode | string, callback: Function) => Function
   sendToPlaytest: (data: string) => void

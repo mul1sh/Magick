@@ -180,8 +180,8 @@ const MagickInterfaceProvider = ({ children, tab }) => {
 
   }
 
-  const runSpell = async (inputs, spellId, state) => {
-    const response = await _runSpell({ inputs, spellId, state })
+  const runSpell = async (inputs, spellId) => {
+    const response = await _runSpell({ inputs, spellId })
 
     if ('error' in response) {
       throw new Error(`Error running spell ${spellId}`)

@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -54,9 +53,8 @@ export class DocumentGet extends MagickComponent<Promise<WorkerReturn>> {
     _node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    context: { magick: EngineContext }
   ) {
-    const { env } = context.magick
+    const { env } = process
     const id = inputs['id'][0] as string
 
     const resp = await axios.get(`${env.APP_SEARCH_SERVER_URL}/document/${id}`)

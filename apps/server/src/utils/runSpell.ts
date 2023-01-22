@@ -1,7 +1,5 @@
 import { SpellRunner, GraphData, Spell as SpellType } from '@magickml/engine'
 import { app } from '../app'
-import { buildMagickInterface } from '../buildMagickInterface'
-import { ServerError } from './ServerError'
 
 export type RunSpellArgs = {
   spellName: string
@@ -17,12 +15,7 @@ export const runSpell = async ({
 
   let spell = await app.service('spells').find({ query: { name: spellName } }) as any
 
-  if (!spell?.graph) {
-    throw new ServerError('not-found', `Spell with name ${spellName} not found`)
-  }
-
   const graph = spell.graph as unknown as GraphData
-  const magickInterface = buildMagickInterface()
 
   const formattedInputs = inputFormatter ? inputFormatter(graph) : inputs
 
@@ -32,7 +25,7 @@ export const runSpell = async ({
   }
 
   // Initialize the spell runner
-  const spellRunner = new SpellRunner({ magickInterface })
+  const spellRunner = new SpellRunner({})
 
   // Load the spell in to the spell runner
   await spellRunner.loadSpell(spellToRun as unknown as SpellType)

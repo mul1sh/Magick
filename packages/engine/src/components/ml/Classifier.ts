@@ -5,7 +5,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -69,9 +68,8 @@ export class Classifier extends MagickComponent<Promise<InputReturn>> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { silent, magick }: { silent: boolean; magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const inputData = inputs['input'][0]
     const labels = inputs['labels'] && inputs['labels'][0]
     const labelData = ((labels ?? node.data?.labels) as string).split(', ')
@@ -89,11 +87,6 @@ export class Classifier extends MagickComponent<Promise<InputReturn>> {
 
     const { data, success, error } = resp.data
 
-    if (!silent) {
-      if (!success || !data) node.display(error)
-      else node.display('Top label is ' + data && data.labels)
-    }
-    console.log('Respone is', resp.data)
     return { output: (data && data?.labels && data?.labels[0]) ?? 'error' }
   }
 }

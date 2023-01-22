@@ -3,7 +3,6 @@ import Handlebars from 'handlebars'
 import Rete from 'rete'
 import { CompletionData, makeCompletion } from '../../functions/makeCompletion'
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -133,7 +132,6 @@ export class Generator extends MagickComponent<Promise<WorkerReturn>> {
     node: NodeData,
     rawInputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { silent: boolean; magick: EngineContext }
   ) {
     const inputs = Object.entries(rawInputs).reduce((acc, [key, value]) => {
       acc[key] = value[0]
@@ -191,8 +189,6 @@ export class Generator extends MagickComponent<Promise<WorkerReturn>> {
       const raw = choice.text
       const result = raw
       const composed = `${prompt}${result}`
-
-      // if (!silent) node.display(result)
 
       return {
         result,

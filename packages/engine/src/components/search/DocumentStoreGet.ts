@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -55,9 +54,8 @@ export class DocumentStoreGet extends MagickComponent<Promise<WorkerReturn>> {
     _node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const name = inputs['name'][0] as string
 
     const resp = await axios.get(

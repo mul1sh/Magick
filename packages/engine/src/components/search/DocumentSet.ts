@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -70,9 +69,8 @@ export class DocumentSet extends MagickComponent<void> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    context: { magick: EngineContext; silent: boolean }
   ) {
-    const { env } = context.magick
+    const { env } = process
     const storeId = inputs['storeId'][0]
     const title = inputs['title'] ? (inputs['title'][0] as string) : ''
     const description = inputs['description']

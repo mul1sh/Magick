@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -69,9 +68,8 @@ export class DocumentEdit extends MagickComponent<void> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { silent, magick }: { silent: boolean; magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const documentId = inputs['documentId'][0]
     const storeId = inputs['storeId'][0]
     const keywords = inputs['keywords'] ? (inputs['keywords'][0] as string) : ''
@@ -90,6 +88,5 @@ export class DocumentEdit extends MagickComponent<void> {
         storeId,
       }
     )
-    if (!silent) node.display(resp.data)
   }
 }

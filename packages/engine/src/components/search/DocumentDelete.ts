@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -45,9 +44,8 @@ export class DocumentDelete extends MagickComponent<void> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const docId = inputs['docId'][0]
     node.display(docId)
     const resp = await axios.delete(`${env.APP_SEARCH_SERVER_URL}/document`, {

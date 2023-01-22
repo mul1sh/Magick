@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -69,9 +68,8 @@ export class Search extends MagickComponent<Promise<WorkerReturn>> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const searchStr = inputs['searchStr'][0] as string
     console.log('SEARCHING FOR:', searchStr)
     const documents: Document[] = []

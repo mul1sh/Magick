@@ -12,5 +12,5 @@
   "files": [],
   "include": [
     "src"
-  ]
+, "../../apps/server/src/utils/runSpell.ts"  ]
 }

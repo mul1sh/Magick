@@ -3,7 +3,6 @@ import Rete from 'rete'
 import xmldoc from 'xmldoc'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -64,9 +63,8 @@ export class RSSGet extends MagickComponent<Promise<WorkerReturn>> {
     node: NodeData,
     _inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const feedUrl = node?.data?.feedUrl as string
     const toDocument = node?.data?.toDocument
     const fetchWay = node?.data?.fetchWay as string

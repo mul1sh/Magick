@@ -1,10 +1,9 @@
 import io from 'socket.io'
 
-import { EngineContext, Spell } from '../types'
+import { Spell } from '../types'
 import SpellRunner from './SpellRunner'
 
 type SpellManagerArgs = {
-  magickInterface: EngineContext
   socket?: io.Socket
   cache?: boolean
 }
@@ -13,50 +12,44 @@ export default class SpellManager {
   spellRunnerMap: Map<string, SpellRunner> = new Map()
   socket?: io.Socket
   cache: boolean
-  magickInterface: EngineContext
 
   constructor({
-    magickInterface,
     socket = undefined,
     cache = false,
   }: SpellManagerArgs) {
     this.socket = socket
-    this.magickInterface = magickInterface
     this.cache = cache
   }
 
   // This getter will overwrite the standard runSpell with a new one.
   // this runSpell will add spells to the cache
-  processMagickInterface(magickInterface): EngineContext {
-    if (!this.cache) return magickInterface
+  // processMagickInterface() {
+  //   const runSpell = async (
+  //     flattenedInputs,
+  //     spellId
+  //   ) => {
+  //     if (this.getSpellRunner(spellId)) {
+  //       const outputs = await this.run(spellId, flattenedInputs)
+  //       return outputs
+  //     }
 
-    const runSpell: EngineContext['runSpell'] = async (
-      flattenedInputs,
-      spellId
-    ) => {
-      if (this.getSpellRunner(spellId)) {
-        const outputs = await this.run(spellId, flattenedInputs)
-        return outputs
-      }
+  //     const spell = await getSpell(spellId)
 
-      const spell = await magickInterface.getSpell(spellId)
+  //     if (!spell) {
+  //       throw new Error(`No spell found with name ${spellId}`)
+  //     }
 
-      if (!spell) {
-        throw new Error(`No spell found with name ${spellId}`)
-      }
+  //     await this.load(spell)
 
-      await this.load(spell)
+  //     const outputs = await this.run(spellId, flattenedInputs)
 
-      const outputs = await this.run(spellId, flattenedInputs)
+  //     return outputs
+  //   }
 
-      return outputs
-    }
-
-    return {
-      ...magickInterface,
-      runSpell,
-    }
-  }
+  //   return {
+  //     runSpell,
+  //   }
+  // }
 
   getSpellRunner(spellId: string) {
     return this.spellRunnerMap.get(spellId)
@@ -73,7 +66,6 @@ export default class SpellManager {
       return this.getSpellRunner(spell.name)
 
     const spellRunner = new SpellRunner({
-      magickInterface: this.magickInterface,
       socket: this.socket,
     })
 

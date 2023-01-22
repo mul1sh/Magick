@@ -1,4 +1,3 @@
-import { buildMagickInterface } from '../../server/src/buildMagickInterface'
 import { tts, tts_tiktalknet } from '@magickml/server-core'
 import { SpellManager } from '@magickml/engine'
 import { app } from './app'
@@ -119,7 +118,6 @@ export class Agent {
     this.data = {...agent.data, ...agent.data.data}
     this.name = agent.agent ?? agent.name ?? 'agent'
     this.spellManager = new SpellManager({
-      magickInterface: buildMagickInterface({}),
       cache: false,
     })
 

@@ -6,7 +6,6 @@ import axios from 'axios'
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -58,9 +57,8 @@ export class DocumentSetMass extends MagickComponent<void> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     const storeId = inputs['storeId']?.[0]
     let documents = inputs['documents']
     // eslint-disable-next-line camelcase

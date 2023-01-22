@@ -1,5 +1,3 @@
-import {EngineContext} from '@magickml/engine'
-
 import { runSpell } from './utils/runSpell'
 import {
   API_ROOT_URL,
@@ -10,7 +8,7 @@ import { app } from './app'
 
 export const buildMagickInterface = (
   overrides: Record<string, Function> = {}
-): EngineContext => {
+) => {
   // eslint-disable-next-line functional/no-let
   const env = {
     API_ROOT_URL,

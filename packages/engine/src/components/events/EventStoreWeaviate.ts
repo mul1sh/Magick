@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import {
   Event,
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -65,7 +64,6 @@ export class EventStoreWeaviate extends MagickComponent<Promise<void>> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { silent, magick }: { silent: boolean; magick: EngineContext }
   ) {
 
     const storeEventWeaviate = async ({
@@ -104,9 +102,6 @@ export class EventStoreWeaviate extends MagickComponent<Promise<void>> {
 
     if (content && content !== '') {
       const respUser = await storeEventWeaviate({ ...event, content, agentId } as any)
-      if (!silent) node.display(respUser)
-    } else {
-      if (!silent) node.display('No input')
     }
   }
 }

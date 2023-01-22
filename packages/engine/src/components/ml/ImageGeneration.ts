@@ -1,7 +1,6 @@
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -91,7 +90,6 @@ export class ImageGeneration extends MagickComponent<Promise<InputReturn>> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { silent }: { silent: boolean; magick: EngineContext }
   ) {
     const prompt = inputs['prompt'] && inputs['prompt'][0]
     const endpoint = inputs['endpoint'] && inputs['endpoint'][0]
@@ -100,11 +98,6 @@ export class ImageGeneration extends MagickComponent<Promise<InputReturn>> {
 
     const { images } = await getPrompt(prompt, server)
     const image = images && images[0]
-
-    if (!silent) {
-      if (!image) node.display('Error: No data returned', image)
-      else node.display('Response is', image)
-    }
 
     return { output: image }  }
 }

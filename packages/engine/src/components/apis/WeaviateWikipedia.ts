@@ -6,7 +6,6 @@ import {
   MagickNode,
   MagickWorkerInputs,
   MagickWorkerOutputs,
-  EngineContext,
 } from '../../types'
 import { TaskOptions } from '../../plugins/taskPlugin/task'
 import { anySocket, stringSocket, triggerSocket } from '../../sockets'
@@ -64,9 +63,8 @@ export class WeaviateWikipedia extends MagickComponent<void> {
     node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
-    const { env } = magick
+    const { env } = process
     this._task.closed = ['success', 'error']
     try {
       console.log('keyword', node.data.keyword)

@@ -5,7 +5,6 @@ import {
   MagickNode,
   MagickWorkerInputs,
   MagickWorkerOutputs,
-  EngineContext,
 } from '../../types'
 import { InputControl } from '../../dataControls/InputControl'
 import { triggerSocket, stringSocket, anySocket } from '../../sockets'

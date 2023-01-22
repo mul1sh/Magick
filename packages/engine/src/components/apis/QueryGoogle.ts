@@ -1,7 +1,6 @@
 import Rete from 'rete'
 
 import {
-  EngineContext,
   NodeData,
   MagickNode,
   MagickWorkerInputs,
@@ -60,7 +59,6 @@ export class QueryGoogle extends MagickComponent<Promise<WorkerReturn>> {
     _node: NodeData,
     inputs: MagickWorkerInputs,
     _outputs: MagickWorkerOutputs,
-    { magick }: { magick: EngineContext }
   ) {
     const query = inputs.query[0] as string
     const {summary, links} = await queryGoogleSearch(query)
