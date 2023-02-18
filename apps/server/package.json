@@ -1,10 +1,7 @@
 {
   "name": "@magickml/server",
-  "description": "Server for Magick",
   "version": "0.1.0",
   "private": true,
-  "contributors": [],
-  "bugs": {},
   "feathers": {
     "language": "ts",
     "packager": "npm",
@@ -26,11 +23,5 @@
     "bundle:client": "npm run compile && npm pack --pack-destination ./public",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make"
-  },
-  "dependencies": {
-    "feathers-swagger": "^2.0.0",
-    "knex": "^2.4.2",
-    "@magickml/engine": "file:../../packages/engine",
-    "@magickml/server-core": "file:../../packages/server-core"
   }
 }

@@ -19,7 +19,8 @@
       "configFile": "packages/editor/vite.config.ts",
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/packages/editor"
+        "outputPath": "dist/packages/editor",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {

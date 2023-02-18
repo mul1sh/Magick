@@ -12,7 +12,7 @@ const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 ;(window as any).root = root
 const Root = () => (
-  <MagickIDE />
+  <MagickIDE config={{} as any} />
 )
 
 root.render(<Root />)
